@@ -24,7 +24,7 @@ jobs:
           npm install --save-dev htmlhint
 
       - name: Run HTMLHint
-        run: /usr/local/bin/npx htmlhint "**/*.html"
+        run: npx htmlhint "**/*.html"
 
   lint-css:
     name: lint / Lint CSS files
