@@ -11,7 +11,7 @@ jobs:
     name: lint / Lint HTML files
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code
+      - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Setup Node.js
@@ -19,17 +19,18 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install Dependencies
-        run: npm install
+      - name: Install HTMLHint
+        run: |
+          npm install --save-dev htmlhint
 
       - name: Run HTMLHint
-        run: npx --yes htmlhint "**/*.html"
+        run: npx htmlhint "**/*.html"
 
   lint-css:
     name: lint / Lint CSS files
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code
+      - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Setup Node.js
@@ -37,8 +38,9 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install Dependencies
-        run: npm install
+      - name: Install Stylelint
+        run: |
+          npm install --save-dev stylelint stylelint-config-standard
 
       - name: Run Stylelint
-        run: npx --yes stylelint "**/*.css"
+        run: npx stylelint "**/*.css"
