@@ -7,7 +7,8 @@ on:
     branches: [develop]
 
 jobs:
-  lint:
+  lint-html:
+    name: Lint HTML files
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -21,9 +22,23 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Lint HTML files
+      - name: Run HTMLHint
         run: npx --yes htmlhint "**/*.html"
 
-      - name: Lint CSS files
-        run: npx --yes stylelint "**/*.css"
+  lint-css:
+    name: Lint CSS files
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Stylelint
+        run: npx --yes stylelint "**/*.css"
